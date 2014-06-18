@@ -3,22 +3,78 @@ package edu.pms.z2h_old.myclimbers;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.os.Build;
 
 public class MainActivity extends Activity {
+	
+	private String tag = getClass().getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
+		ImageButton btnLog = (ImageButton) findViewById(R.id.btnLog);
+		ImageButton btnCheckin = (ImageButton) findViewById(R.id.btnCheckin);
+		ImageButton btnEmergency = (ImageButton) findViewById(R.id.btnEmergency);
+		
+		btnLog.setOnClickListener(new View.OnClickListener() {
+		    public void onClick(View v) {
+		        Log.i(tag,"Log");
+		    }
+		});
+		
+		
+		
+		btnCheckin.setOnClickListener(new View.OnClickListener() {
+		    public void onClick(View v) {
+		        Log.i(tag,"Checkin");
+		    }
+		});
+		
+		
+		
+		btnEmergency.setOnClickListener(new View.OnClickListener() {
+		    public void onClick(View v) {
+		        Log.i(tag,"Emergency");
+		    }
+		});
+		
+		
+		
+		
 
 	}
+	
+	
+	
+	public void viewMountain(View view) {
+		Log.i(tag,"Mountain");
+	    
+	}
+	
+	
+	public void viewCompass(View view) {
+		Log.i(tag,"Compass");
+	    
+	}
+	
+	
+	
 	
 	
 	
@@ -33,6 +89,10 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	
+	
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
