@@ -4,5 +4,14 @@
     <string name="app_name">MyClimbers</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+   
+    
+    
+    <string name="mountain">Mountain</string>
+    <string name="compass">Compass</string>
+    <string name="checkin">Check-In</string>
+    <string name="log">Log</string>
+    <string name="emergency">Emergency</string>
+ 
 
 </resources>
