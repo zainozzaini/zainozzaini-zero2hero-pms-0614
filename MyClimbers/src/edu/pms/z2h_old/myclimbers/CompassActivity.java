@@ -53,7 +53,7 @@ public class CompassActivity extends Activity{
 				
 				//Demo 4 Task 
 				try{
-//					imgCompass.setRotation(Float.parseFloat(txtRotate.getText().toString()));
+//		:P			imgCompass.setRotation(Float.parseFloat(txtRotate.getText().toString()));
 					rotateAnimation(Float.parseFloat(txtRotate.getText().toString()));
 				}catch(Exception e){
 					Toast.makeText(getApplication(), "Invalid Value", Toast.LENGTH_LONG).show();

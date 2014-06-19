@@ -18,6 +18,8 @@ import android.os.Build;
 public class ListViewActivity extends ListActivity {
 	  public void onCreate(Bundle icicle) {
 		    super.onCreate(icicle);
+		   
+		    
 		    String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
 		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
 		        "Linux", "OS/2","Android", "iPhone", "WindowsMobile",
@@ -32,6 +34,8 @@ public class ListViewActivity extends ListActivity {
 		    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 		        android.R.layout.simple_list_item_1, values);
 		    setListAdapter(adapter);
+		    
+		    
 		  }
 	  
 	  

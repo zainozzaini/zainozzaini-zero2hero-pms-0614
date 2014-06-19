@@ -1,5 +1,8 @@
 package edu.pms.z2h_old.myclimbers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -22,6 +25,9 @@ import android.os.Build;
 public class MainActivity extends Activity {
 	
 	private String tag = getClass().getSimpleName();
+	private ImageButton btnLog;
+	private ImageButton btnCheckin;
+	private ImageButton btnEmergency;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +35,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		
-		ImageButton btnLog = (ImageButton) findViewById(R.id.btnLog);
-		ImageButton btnCheckin = (ImageButton) findViewById(R.id.btnCheckin);
-		ImageButton btnEmergency = (ImageButton) findViewById(R.id.btnEmergency);
+		btnLog = (ImageButton) findViewById(R.id.btnLog);
+		btnCheckin = (ImageButton) findViewById(R.id.btnCheckin);
+		btnEmergency = (ImageButton) findViewById(R.id.btnEmergency);
 		
 		btnLog.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
@@ -49,6 +55,9 @@ public class MainActivity extends Activity {
 		btnCheckin.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
 		        Log.i(tag,"Checkin");  
+		        Intent i = new Intent(getApplication(),LogActivity.class);
+		        i.putExtra("checkin-time", getCheckinTime());
+		        startActivity(i);
 		       
 		    }
 		});
@@ -66,6 +75,13 @@ public class MainActivity extends Activity {
 		
 		
 
+	}
+	
+	private String getCheckinTime(){
+		Date dNow = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+		
+		return df.format(dNow);
 	}
 	
 	
