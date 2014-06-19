@@ -40,6 +40,7 @@ public class ListViewActivity extends ListActivity {
 		  protected void onListItemClick(ListView l, View v, int position, long id) {
 		    String item = (String) getListAdapter().getItem(position);
 		    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+		    
 		  }
 	
 	

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +36,11 @@ public class MainActivity extends Activity {
 		btnLog.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
 		        Log.i(tag,"Log");
+		        Toast.makeText(getApplication(), "Log", Toast.LENGTH_LONG).show();
+		        
+		        Intent intent = new Intent(getApplication(), LogActivity.class);
+		        startActivity(intent);
+		       
 		    }
 		});
 		
@@ -42,7 +48,8 @@ public class MainActivity extends Activity {
 		
 		btnCheckin.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
-		        Log.i(tag,"Checkin");
+		        Log.i(tag,"Checkin");  
+		       
 		    }
 		});
 		
@@ -51,6 +58,7 @@ public class MainActivity extends Activity {
 		btnEmergency.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
 		        Log.i(tag,"Emergency");
+		       
 		    }
 		});
 		
@@ -64,12 +72,16 @@ public class MainActivity extends Activity {
 	
 	public void viewMountain(View view) {
 		Log.i(tag,"Mountain");
+		   Intent intent = new Intent(getApplication(), MountainActivity.class);
+	        startActivity(intent);
 	    
 	}
 	
 	
 	public void viewCompass(View view) {
 		Log.i(tag,"Compass");
+		   Intent intent = new Intent(getApplication(), CompassActivity.class);
+	       startActivity(intent);
 	    
 	}
 	
