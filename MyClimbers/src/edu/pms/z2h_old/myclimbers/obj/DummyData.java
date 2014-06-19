@@ -1,15 +1,18 @@
 package edu.pms.z2h_old.myclimbers.obj;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.util.Log;
 
 public class DummyData {
 	
 	private static DummyData instance;
 	private Checkin checkin;
-	private String[] checkinArray = new String[100];
+	private List<String> checkinList = new ArrayList<String>();
 	private String tag = getClass().getSimpleName();
 	
-	private int row = 0;
+
 	
 	public DummyData(){
 		
@@ -17,18 +20,11 @@ public class DummyData {
 	
 	
 	
-	public int getRow() {
-		return row;
+
+	public List<String> getCheckinList() {
+		return checkinList;
 	}
 
-
-
-
-
-
-	public String[] getCheckinArray() {
-		return checkinArray;
-	}
 
 
 
@@ -40,7 +36,8 @@ public class DummyData {
 	public void setCheckin(Checkin checkin) {
 		this.checkin = checkin;
 		String checkPointWithTime = checkin.getCheckPoint() + "(" + checkin.getTime() +")";
-		checkinArray[++row] = checkPointWithTime;
+		checkinList.add(checkPointWithTime);
+	
 	
 	}
 

@@ -27,8 +27,7 @@ public class LogActivity extends Activity{
 			Log.i(tag,getIntent().getStringExtra("checkin-time"));
 			
 			dummyData.getInstance().setCheckin(new Checkin("CHECK-1",getIntent().getStringExtra("checkin-time")));
-			Log.i(tag,"ROW=" +dummyData.getInstance().getRow());
-			Log.i(tag,"Checkin" +dummyData.getInstance().getCheckinArray()[dummyData.getInstance().getRow()]);
+			
 		}
 		
 		
@@ -41,7 +40,7 @@ public class LogActivity extends Activity{
 
 			    
 			    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-			        android.R.layout.simple_list_item_1, dummyData.getInstance().getCheckinArray());
+			        android.R.layout.simple_list_item_1, dummyData.getInstance().getCheckinList());
 			    lvCheckin.setAdapter(adapter);
 	}
 
