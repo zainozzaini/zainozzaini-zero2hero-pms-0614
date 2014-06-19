@@ -8,7 +8,9 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -67,6 +69,7 @@ public class MainActivity extends Activity {
 		btnEmergency.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
 		        Log.i(tag,"Emergency");
+		        sendPanicSms();
 		       
 		    }
 		});
@@ -75,6 +78,28 @@ public class MainActivity extends Activity {
 		
 		
 
+	}
+	
+	
+	private void sendPanicSms(){
+		//V1
+//		Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+//		sendIntent.putExtra("sms_body", "default content"); 
+//		sendIntent.setType("vnd.android-dir/mms-sms");
+//		startActivity(sendIntent);
+		
+		
+		//v2 ref: http://android-er.blogspot.com/2011/03/send-sms-using-intentactionsendto.html
+		
+//		Uri uri = Uri.parse("smsto:" + "PUT YOUR NUMBER HERE");
+//	    Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+//	    intent.putExtra("sms_body", "HELP ME -- message from MyClimbersApp ");  
+//	    startActivity(intent);
+		
+		
+		//v3 Ref:
+		SmsManager smsManager = SmsManager.getDefault();
+		smsManager.sendTextMessage("PUT YOUR NUMBER HERE", null, "HELP ME -- message from MyClimbersApp", null, null);
 	}
 	
 	private String getCheckinTime(){

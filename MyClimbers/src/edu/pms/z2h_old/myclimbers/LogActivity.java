@@ -63,7 +63,7 @@ public class LogActivity extends Activity{
 		.setContentTitle("MyClimbers")
 		.setContentText("Congurate you have arrive at" +dateTime);
 		// Creates an explicit intent for an Activity in your app
-		Intent resultIntent = new Intent(this, MainActivity.class);
+		Intent resultIntent = new Intent(this, LogActivity.class);
 
 		// The stack builder object will contain an artificial back stack for the
 		// started Activity.
