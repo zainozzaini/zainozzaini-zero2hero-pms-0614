@@ -9,6 +9,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -25,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
 	
@@ -33,6 +35,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 	private ImageButton btnLog;
 	private ImageButton btnCheckin;
 	private ImageButton btnEmergency;
+	
+	private SharedPreferences sharedPrefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		setContentView(R.layout.activity_main);
 		
 		tts = new TextToSpeech(this, this);
+		
+		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		btnLog = (ImageButton) findViewById(R.id.btnLog);
 		btnCheckin = (ImageButton) findViewById(R.id.btnCheckin);
@@ -74,8 +80,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		btnEmergency.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
 		        Log.i(tag,"Emergency");
-		        sendPanicSms();
-		        speakOut();
+		        Log.i(tag,"Send sms -" +sharedPrefs.getBoolean("sendsms", true));
+		        
+		        if(sharedPrefs.getBoolean("sendsms", true)){
+		        	//send sms
+		        	 sendPanicSms(); //send panic sms
+		        	 speakOut("We have send your panic sms");
+		        }else{
+		        	//just speakout
+		        	 speakOut("Sorry you  are not activate your panic SMS.");
+		        }
+		       
+		       
 		       
 		    }
 		});
@@ -159,9 +175,24 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
+		
 		if (id == R.id.action_settings) {
+			Log.i(tag,"Settings");
+			
+			Intent i = new Intent(this,SettingsActivity.class);
+			startActivity(i);
+			
 			return true;
 		}
+		
+		if (id == R.id.action_about) {
+			Log.i(tag,"About");
+			
+			Intent i = new Intent(this,AboutActivity.class);
+			startActivity(i);
+			return true;
+		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -171,7 +202,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		// TODO Auto-generated method stub
 		if (status == TextToSpeech.SUCCESS) {
 			 
-            int result = tts.setLanguage(Locale.CHINESE);
+            int result = tts.setLanguage(Locale.US);
  
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -185,8 +216,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
 	}
 	
-	private void speakOut(){
-		tts.speak("Panic SMS sent", TextToSpeech.QUEUE_FLUSH, null);
+	private void speakOut(String msg){
+		tts.speak(msg, TextToSpeech.QUEUE_FLUSH, null);
 	}
 	
 	

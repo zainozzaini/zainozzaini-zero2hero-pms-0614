@@ -14,5 +14,16 @@
     <string name="checkin">Check-In</string>
     <string name="log">Log</string>
     <string name="emergency">Emergency</string>
+    
+    <string name="details">Details</string>
+    <string name="sex">Sex</string>
+    <string name="summary_sex">Male or Female</string>
+    
+    <string name="name">Name :</string>
+    
+    <string name="settings">Settings</string>
+    
+    <string name="title_sendsms">Panic SMS</string>
+     <string name="summary_sendsms">Send SMS for your life</string>
 
 </resources>
