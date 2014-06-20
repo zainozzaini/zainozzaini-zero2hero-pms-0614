@@ -63,6 +63,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		        Log.i(tag,"Checkin");  
 		        Intent i = new Intent(getApplication(),LogActivity.class);
 		        i.putExtra("checkin-time", getCheckinTime());
+		        i.putExtra("checkin-checkpoint", "CHECKPOINT 1");
 		        startActivity(i);
 		       
 		    }
