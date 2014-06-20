@@ -2,6 +2,7 @@ package edu.pms.z2h_old.myclimbers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -10,6 +11,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +26,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.os.Build;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
 	
+	private TextToSpeech tts;
 	private String tag = getClass().getSimpleName();
 	private ImageButton btnLog;
 	private ImageButton btnCheckin;
@@ -36,6 +39,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		tts = new TextToSpeech(this, this);
 		
 		btnLog = (ImageButton) findViewById(R.id.btnLog);
 		btnCheckin = (ImageButton) findViewById(R.id.btnCheckin);
@@ -70,6 +74,7 @@ public class MainActivity extends Activity {
 		    public void onClick(View v) {
 		        Log.i(tag,"Emergency");
 		        sendPanicSms();
+		        speakOut();
 		       
 		    }
 		});
@@ -158,6 +163,43 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+	@Override
+	public void onInit(int status) {
+		// TODO Auto-generated method stub
+		if (status == TextToSpeech.SUCCESS) {
+			 
+            int result = tts.setLanguage(Locale.CHINESE);
+ 
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            }
+              
+            
+ 
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+	}
+	
+	private void speakOut(){
+		tts.speak("Panic SMS sent", TextToSpeech.QUEUE_FLUSH, null);
+	}
+	
+	
+	
+	
+	 @Override
+	    public void onDestroy() {
+	        // Don't forget to shutdown tts!
+	        if (tts != null) {
+	            tts.stop();
+	            tts.shutdown();
+	        }
+	        super.onDestroy();
+	    }
 
 	
 }
